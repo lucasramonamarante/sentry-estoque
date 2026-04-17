@@ -1,29 +1,22 @@
 {
-  "name": "backend",
+  "name": "sentry-estoque-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "API Node.js para o sistema Sentry Estoque",
   "main": "index.js",
   "scripts": {
+    "start": "npx prisma generate && node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "@prisma/client": "^6.19.3",
-    "bcryptjs": "^3.0.3",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "jsonwebtoken": "^9.0.3"
   },
- "devDependencies": {
+  "devDependencies": {
     "nodemon": "^3.1.14",
     "prisma": "^6.19.3"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "postinstall": "prisma generate"
   }
 }
