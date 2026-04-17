@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ... (seus models continuam intactos aqui embaixo)
+
+// ... (Mantenha todos os seus models Usuario, Produto e Movimentacao exatamente como estavam)
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String   
+  perfil    String   
+  criado_em DateTime @default(now())
+
+  movimentacoes Movimentacao[]
+}
+
+model Produto {
+  id                Int            @id @default(autoincrement())
+  sku               String         @unique
+  nome              String
+  preco_custo       Float
+  preco_venda       Float
+  quantidade_atual  Int            @default(0)
+  quantidade_minima Int            @default(0)
+  criado_em         DateTime       @default(now())
+  
+  movimentacoes     Movimentacao[] 
+}
+
+model Movimentacao {
+  id          Int      @id @default(autoincrement())
+  produto_id  Int
+  usuario_id  Int?     
+  tipo        String   
+  quantidade  Int      
+  motivo      String   
+  data        DateTime @default(now())
+
+  produto     Produto  @relation(fields: [produto_id], references: [id], onDelete: Cascade)
+  usuario     Usuario? @relation(fields: [usuario_id], references: [id])
+}
